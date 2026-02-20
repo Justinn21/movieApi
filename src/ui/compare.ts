@@ -1,6 +1,5 @@
 import { state, setCompare } from "../store"
 import { fetchMovieDetail } from "../api"
-import { IMG_BASE } from "../api"
 
 export async function renderCompare(): Promise<void> {
   const modal = document.getElementById("compare-modal") as HTMLDialogElement
