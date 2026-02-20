@@ -1,22 +1,87 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fr" data-theme="light">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <link href="/src/style.css" rel="stylesheet" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>movieapi</title>
-  </head>
-  <body>
-    <header></header>
-    <main>
-      <section>
-        <div id="allMovies">
-          
-        </div>
-      </section>
-    </main>
-    <footer></footer>
+    <title>MovieAPI</title>
     <script type="module" src="/src/main.ts"></script>
+  </head>
+
+  <body class="bg-base-200 min-h-screen">
+
+    
+    <header class="navbar bg-base-100 shadow mb-6 px-6">
+      <div class="flex-1">
+        <h1 class="text-xl font-bold">TastyCrousFilm</h1>
+      </div>
+      <div class="flex gap-2">
+        <button class="btn btn-sm" id="view-toggle">Voir mes favoris ❤️</button>
+        <button class="btn btn-sm" id="theme-toggle">Thème</button>
+      </div>
+    </header>
+
+    <main class="container mx-auto px-4">
+
+  
+  <div id="stats-banner" class="mb-6"></div>
+
+  <div class="mb-6">
+  <input 
+    type="text" 
+    id="search-input" 
+    placeholder="Rechercher un film..." 
+    class="input input-bordered w-full max-w-md"
+  />
+</div>
+  
+  <div class="mb-6">
+    <select class="select select-bordered" id="sort-select">
+      <option value="popularity-desc">Popularité (haute → basse)</option>
+      <option value="popularity-asc">Popularité (basse → haute)</option>
+      <option value="vote_average-desc">Note (haute → basse)</option>
+      <option value="vote_average-asc">Note (basse → haute)</option>
+      <option value="title-asc">Titre (A → Z)</option>
+      <option value="title-desc">Titre (Z → A)</option>
+      <option value="release_date-desc">Date (récent → ancien)</option>
+      <option value="release_date-asc">Date (ancien → récent)</option>
+    </select>
+  </div>
+
+  
+  
+
+  
+  <div id="movie-grid" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4"></div>
+
+  
+  <div class="flex justify-center my-8">
+    <button class="btn btn-primary" id="load-more">Voir plus</button>
+  </div>
+
+</main>
+
+    
+    <dialog id="movie-modal" class="modal">
+      <div class="modal-box w-11/12 max-w-2xl">
+        <form method="dialog">
+          <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+        </form>
+        <div id="modal-content"></div>
+      </div>
+      <form method="dialog" class="modal-backdrop">
+        <button>Fermer</button>
+      </form>
+    </dialog>
+<dialog id="compare-modal" class="modal">
+  <div class="modal-box w-11/12 max-w-3xl">
+    <form method="dialog">
+      <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+    </form>
+    <div id="compare-panel"></div>
+  </div>
+  <form method="dialog" class="modal-backdrop">
+    <button>Fermer</button>
+  </form>
+</dialog>
   </body>
 </html>
