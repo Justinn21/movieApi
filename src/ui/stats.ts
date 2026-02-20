@@ -1,8 +1,8 @@
-import { state, getAverageRating } from "../store"
+import { state, getAverageRating } from "../store";
 
 export function renderStats(): void {
-  const banner = document.getElementById("stats-banner")
-  if (!banner) return
+  const banner = document.getElementById("stats-banner");
+  if (!banner) return;
 
   banner.innerHTML = `
     <div class="stats shadow w-full">
@@ -19,5 +19,5 @@ export function renderStats(): void {
         <div class="stat-value">${state.favorites.length}</div>
       </div>
     </div>
-  `
+  `;
 }

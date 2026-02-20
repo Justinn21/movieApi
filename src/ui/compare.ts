@@ -1,21 +1,21 @@
-import { state, setCompare } from "../store"
-import { fetchMovieDetail } from "../api"
+import { state, setCompare } from "../store";
+import { fetchMovieDetail } from "../api";
 
 export async function renderCompare(): Promise<void> {
-  const modal = document.getElementById("compare-modal") as HTMLDialogElement
-  const panel = document.getElementById("compare-panel")
-  if (!modal || !panel) return
+  const modal = document.getElementById("compare-modal") as HTMLDialogElement;
+  const panel = document.getElementById("compare-panel");
+  if (!modal || !panel) return;
 
-  const id1 = state.compareIds[0]
-  const id2 = state.compareIds[1]
+  const id1 = state.compareIds[0];
+  const id2 = state.compareIds[1];
 
-  if (!id1 || !id2) return
+  if (!id1 || !id2) return;
 
-  panel.innerHTML = `<span class="loading loading-spinner"></span>`
-  modal.showModal()
+  panel.innerHTML = `<span class="loading loading-spinner"></span>`;
+  modal.showModal();
 
-  const movie1 = await fetchMovieDetail(id1)
-  const movie2 = await fetchMovieDetail(id2)
+  const movie1 = await fetchMovieDetail(id1);
+  const movie2 = await fetchMovieDetail(id2);
 
   panel.innerHTML = `
     <h2 class="text-xl font-bold text-center mb-4">Comparaison</h2>
@@ -37,10 +37,10 @@ export async function renderCompare(): Promise<void> {
         </div>
       </div>
     </div>
-  `
+  `;
 
   modal.addEventListener("close", () => {
-    setCompare(0, null)
-    setCompare(1, null)
-  })
+    setCompare(0, null);
+    setCompare(1, null);
+  });
 }

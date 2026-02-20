@@ -1,8 +1,8 @@
 export function renderSkeletons(): void {
-  const grid = document.getElementById("movie-grid")
-  if (!grid) return
+  const grid = document.getElementById("movie-grid");
+  if (!grid) return;
 
-  let html = ""
+  let html = "";
 
   for (let i = 0; i < 12; i++) {
     html += `
@@ -13,8 +13,8 @@ export function renderSkeletons(): void {
           <div class="h-3 bg-base-300 rounded w-1/2"></div>
         </div>
       </div>
-    `
+    `;
   }
 
-  grid.innerHTML = html
+  grid.innerHTML = html;
 }

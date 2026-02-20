@@ -1,8 +1,9 @@
 @import "tailwindcss";
 @plugin "daisyui" {
-  themes: light --default, dark --prefersdark;
+  themes:
+    light --default,
+    dark --prefersdark;
 }
-
 
 .card {
   transition: transform 0.2s;
@@ -12,11 +13,9 @@
   transform: scale(1.02);
 }
 
-
 #modal-content img {
   border-radius: 12px;
 }
-
 
 #movie-grid {
   min-height: 200px;

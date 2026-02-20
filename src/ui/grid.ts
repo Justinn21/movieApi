@@ -1,34 +1,32 @@
-import { getSortedMovies, toggleFavorite, isFavorite, state } from "../store"
-import { IMG_BASE } from "../api"
-import { openModal } from "./modal"
-import { renderCompare } from "./compare"
+import { getSortedMovies, toggleFavorite, isFavorite, state } from "../store";
+import { IMG_BASE } from "../api";
+import { openModal } from "./modal";
+import { renderCompare } from "./compare";
 
 export function renderGrid(): void {
+  const grid = document.getElementById("movie-grid");
+  if (!grid) return;
 
-  const grid = document.getElementById("movie-grid")
-  if (!grid) return
-
-  const movies = getSortedMovies()
+  const movies = getSortedMovies();
 
   if (movies.length === 0) {
-    grid.innerHTML = "<p>Aucun film à afficher.</p>"
-    return
+    grid.innerHTML = "<p>Aucun film à afficher.</p>";
+    return;
   }
 
-  grid.innerHTML = ""
+  grid.innerHTML = "";
 
   for (const movie of movies) {
-
     const poster = movie.poster_path
       ? IMG_BASE + movie.poster_path
-      : "https://placehold.co/300x450?text=No+image"
+      : "https://placehold.co/300x450?text=No+image";
 
-    const year = movie.release_date.slice(0, 4)
+    const year = movie.release_date.slice(0, 4);
 
-    const fav = isFavorite(movie.id)
+    const fav = isFavorite(movie.id);
 
-    const card = document.createElement("div")
-    card.className = "card bg-base-100 shadow-md cursor-pointer"
+    const card = document.createElement("div");
+    card.className = "card bg-base-100 shadow-md cursor-pointer";
 
     card.innerHTML = `
       <figure>
@@ -40,42 +38,40 @@ export function renderGrid(): void {
         <div class="flex justify-between items-center mt-2">
           <div class="badge badge-primary">${movie.vote_average.toFixed(1)} / 10</div>
           <div class="flex gap-1">
-            <button class="btn btn-xs btn-ghost compare-btn" data-id="${movie.id}">📊</button>
+            <button class="btn btn-xs btn-ghost compare-btn" data-id="${movie.id}">📊   </button>
             <button class="btn btn-sm btn-ghost fav-btn" data-id="${movie.id}">
               ${fav ? "❤️" : "🤍"}
             </button>
           </div>
         </div>
       </div>
-    `
+    `;
 
     card.addEventListener("click", (e) => {
-      const target = e.target as HTMLElement
-      if (target.closest(".fav-btn")) return
-      if (target.closest(".compare-btn")) return
-      openModal(movie.id)
-    })
+      const target = e.target as HTMLElement;
+      if (target.closest(".fav-btn")) return;
+      if (target.closest(".compare-btn")) return;
+      openModal(movie.id);
+    });
 
-    const favBtn = card.querySelector(".fav-btn")
+    const favBtn = card.querySelector(".fav-btn");
     favBtn?.addEventListener("click", (e) => {
-      e.stopPropagation()
-      toggleFavorite(movie.id)
-      renderGrid()
-    })
+      e.stopPropagation();
+      toggleFavorite(movie.id);
+      renderGrid();
+    });
 
-    const compareBtn = card.querySelector(".compare-btn")
+    const compareBtn = card.querySelector(".compare-btn");
     compareBtn?.addEventListener("click", (e) => {
-      e.stopPropagation()
+      e.stopPropagation();
       if (state.compareIds[0] === null) {
-        state.compareIds[0] = movie.id
+        state.compareIds[0] = movie.id;
       } else {
-        state.compareIds[1] = movie.id
-        renderCompare()
+        state.compareIds[1] = movie.id;
+        renderCompare();
       }
-    })
+    });
 
-    grid.appendChild(card)
-
+    grid.appendChild(card);
   }
-
 }
